@@ -1,0 +1,11 @@
+- name: zsh for root user
+  file:
+    path: "{{ root_home|d('/root') }}/.zshrc"
+    state: touch
+  become: yes
+
+- name: Include zsh config for root
+  lineinfile:
+    path: "{{ root_home|d('/root') }}/.zshrc"
+    line: "source /usr/share/zsh-config/.zshrc"
+
