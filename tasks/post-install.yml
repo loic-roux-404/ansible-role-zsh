@@ -1,7 +1,4 @@
 ---
-- include: fix-shared.yml
-  tags: [ zsh, shared]
-  when: zsh_shared == true
 
 - name: Reset antigen cache
   command: "/bin/zsh -c 'source {{ zsh_config }}; antigen reset'"

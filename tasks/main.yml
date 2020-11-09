@@ -9,6 +9,11 @@
 - include: post-install.yml
   tags: [ zsh, install, post_install ]
 
+- include: fix-shared.yml
+  tags: [ zsh, shared]
+  loop: "{{ (users|d([])) + [{'username': 'root', 'home': 'root'}] }}"
+  when: zsh_shared == true
+
 - name: Reset antigen cache
   command: "/bin/zsh -c 'source {{ zsh_config }}; antigen reset'"
   become: yes

@@ -1,11 +1,12 @@
-- name: zsh for root user
-  file:
-    path: "{{ root_home|d('/root') }}/.zshrc"
-    state: touch
-  become: yes
+- name: Set zsh as default shell
+  user:
+    name: "{{ item.username|d('root') }}"
+    shell: /bin/zsh
+  become: true
+  when: zsh_change_user_shell
 
 - name: Include zsh config for root
   lineinfile:
-    path: "{{ root_home|d('/root') }}/.zshrc"
+    path: "{{ item.home|d('/home/' + username) }}/.zshrc"
     line: "source /usr/share/zsh-config/.zshrc"
-
+    create: yes
