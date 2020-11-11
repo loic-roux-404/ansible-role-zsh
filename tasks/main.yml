@@ -11,7 +11,7 @@
 
 - include: fix-shared.yml
   tags: [ zsh, shared]
-  loop: "{{ (users|d([])) + [{'username': 'root', 'home': 'root'}] }}"
+  loop: "{{ (users|d([])) + [{'username': 'root', 'home': '/root'}] }}"
   when: zsh_shared == true
 
 - name: Reset antigen cache
